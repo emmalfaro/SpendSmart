@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>SpendSmart</title>
+        <meta charset="UTF-8"/>
+
+    </head>
+    <body>
+        <section th:fragment="main">
+            <div class="main">
+                
+                <section th:fragment="encabezado">
+                    <div class="page-header mb-3">
+                        <h1>[[#{plantilla.categorias}]]</h1>
+                        <p>[[#{categoria.subtitulo}]]</p>
+                    </div>
+                </section>
+
+                <section th:fragment="botonAgregar">
+                    <div class="add-category">
+                        <button class="btn btn-primary">+ Agregar categoría</button>
+                    </div>
+                </section>
+
+                <section th:fragment="tabs">
+                    <ul class="category-tabs">
+                        <li><a href="#" class="active">Comida</a></li>
+                        <li><a href="#">Transporte</a></li>
+                        <li><a href="#">Entretenimiento</a></li>
+                        <li><a href="#">Alquiler</a></li>
+                    </ul>
+                </section>
+
+                <section th:fragment="listadoCategorias">
+                    <table class="category-table">
+                        <thead>
+                            <tr>
+                                <th>Descripción</th>
+                                <th>Monto</th>
+                                <th>Fecha</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Compra supermercado</td>
+                                <td>$ 45.00</td>
+                                <td>25-10-2024</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Restaurante</td>
+                                <td>$ 78.00</td>
+                                <td>26-10-2024</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3"></td>
+                                <td>$ 123.00</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </section>
+            </div>
+        </section>
+    </body>
+</html>

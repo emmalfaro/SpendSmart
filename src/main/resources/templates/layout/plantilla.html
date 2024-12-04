@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    
+    <head th:fragment="head">
+        <title>SpendSmart</title>
+        <meta charset="UTF-8"/>
+        <link rel="stylesheet" 
+              th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+        <link rel="stylesheet" 
+              th:href="@{/webjars/font-awesome/css/all.css}" />
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+        <link href="/estilos.css" rel="stylesheet" type="text/css"/>
+
+    </head>
+    <body>
+
+        <header th:fragment="header" class="header">
+            <div id="viewport">
+                <div id="sidebar">
+                    <div class="sidebar-header">
+                        <a class="navbar-brand" th:href="@{/}">[[#{aplicacion.titulo}]]</a>
+                    </div>
+                    <ul class="nav">
+                        <li>
+                            <a th:href="@{/categoria/listado}">
+                                <i class="fa-solid fa-layer-group" style="color: #ffffff;"></i> 
+                                [[#{plantilla.categorias}]]
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="#">
+                                <i class="fa-solid fa-sack-dollar" style="color: #ffffff;"></i>
+                                [[#{plantilla.presupuesto}]]
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa-solid fa-money-bill-trend-up" style="color: #ffffff;"></i>
+                                [[#{plantilla.ingresos}]]
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa-solid fa-money-bill-transfer" style="color: #ffffff;"></i>
+                                [[#{plantilla.gastos}]]
+                            </a>
+                        </li>
+
+                        <li class="sidebar-footer">
+                            <a href="#">
+                                <i class="fa-solid fa-right-from-bracket" style="color: #ffffff;"></i>
+                                [[#{plantilla.salir}]]
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <div id="content">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                        <div class="container-fluid justify-content-end">
+                            <!-- Idioma -->
+                            <div class="dropdown me-3">
+                                <a class="btn dropdown-toggle" 
+                                   href="#" 
+                                   role="button" 
+                                   id="dropdownLanguage" 
+                                   data-bs-toggle="dropdown" 
+                                   aria-expanded="false"
+                                   style="background-color: transparent; 
+                                   border: 3px solid #4A4A4A; 
+                                   color: #4A4A4A; 
+                                   border-radius: 10px;">
+                                    [[#{plantilla.idioma}]]
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownLanguage">
+                                    <li><a class="dropdown-item" th:href="@{/(lang=es)}">Español</a></li>
+                                    <li><a class="dropdown-item" th:href="@{/(lang=en)}">English</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Moneda -->
+                            <div class="dropdown me-3">
+                                <a class="btn dropdown-toggle" 
+                                   href="#" 
+                                   role="button" 
+                                   id="dropdownCurrency" 
+                                   data-bs-toggle="dropdown" 
+                                   aria-expanded="false"
+                                   style="background-color: transparent; 
+                                   border: 3px solid #4A4A4A; 
+                                   color: #4A4A4A; 
+                                   border-radius: 10px;">
+                                    [[#{plantilla.moneda}]]
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownCurrency">
+                                    <li><a class="dropdown-item" href="#">$ USD</a></li>
+                                    <li><a class="dropdown-item" href="#">₡ CRC</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        
+        <section th:fragment="main">
+            <div class="main">
+                <h1>Bienvenido a SpendSmart</h1>
+                <p>
+                    Aquí puedes gestionar tus gastos de manera eficiente. 
+                    Usa los menús para cambiar el idioma o la moneda.
+                </p>
+            </div>
+        </section>
+        
+
+        
+    </body>
+</html>
