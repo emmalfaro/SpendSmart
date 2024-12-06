@@ -61,6 +61,11 @@ CREATE TABLE categorias (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
+INSERT INTO categorias (id_categoria, nombre_categoria) VALUES 
+(1, 'Alimentación'), 
+(2,'Transporte'),
+(3,'Alquiler');
+
 /* Creacion de la tabla presupuestos */
 CREATE TABLE presupuestos (
     id_presupuesto INT AUTO_INCREMENT PRIMARY KEY,
@@ -70,25 +75,38 @@ CREATE TABLE presupuestos (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
+INSERT INTO presupuestos (id_presupuesto, id_categoria, monto) VALUES 
+(1, 1, 300),
+(2, 2, 50),
+(3, 3, 300);
+
+
 /* Creacion de la tabla gastos */
 CREATE TABLE gastos (
     id_gasto INT AUTO_INCREMENT PRIMARY KEY,
     id_categoria INT NOT NULL,
-    id_usuario INT NOT NULL,
     monto DECIMAL(10, 2) NOT NULL,
     descripcion TEXT,
     fecha_gasto DATETIME DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_gastos_categorias FOREIGN KEY (id_categoria) REFERENCES categorias(id_categoria),
-    CONSTRAINT fk_gastos_usuarios FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario))
+    CONSTRAINT fk_gastos_categorias FOREIGN KEY (id_categoria) REFERENCES categorias(id_categoria))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
+
+INSERT INTO gastos (id_gasto, id_categoria, monto, descripcion, fecha_gasto) VALUES 
+(1, 1, 10, 'Supermercado', '2024-10-22'),
+(2, 1, 20, 'Restaurante', '2024-10-26'),
+(3, 2, 30, 'Gasolina', '2024-10-30');
+
 
 /* Creacion de la tabla ingresos */
 CREATE TABLE ingresos (
     id_ingreso INT AUTO_INCREMENT PRIMARY KEY,
-    id_usuario INT NOT NULL,
     monto DECIMAL(10, 2) NOT NULL,
     descripcion TEXT,
-    fecha_ingreso DATETIME DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_ingresos_usuarios FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+    fecha_ingreso DATE
 );
+
+INSERT INTO ingresos (id_ingreso, monto, descripcion, fecha_ingreso) VALUES 
+(1, 100, 'Reembolso', '2024-10-22'),
+(2, 200, 'Bono', '2024-10-26'),
+(3, 300, 'Sueldo', '2024-10-30');

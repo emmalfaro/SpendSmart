@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>SpendSmart</title>
+        <meta charset="UTF-8"/>
+
+    </head>
+    <body>
+        <section th:fragment="mainPresupuesto">
+            <div class="main">
+                
+                <!-- Encabezado -->
+                <section th:fragment="encabezado">
+                    <div class="page-header mb-3">
+                        <h1>[[#{presupuesto.titulo}]]</h1>
+                        <p>[[#{presupuesto.subtitulo}]]</p>
+                    </div>
+                </section>
+
+                <!-- Monto total, editar, agregar -->
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div class="row align-items-center">
+
+                        <!-- Monto total del presupuesto, sumado de todas las categorias -->
+                        <div class="col-auto">
+                            <section>
+                                <div class="card p-3 border-dark" style="width: 200px; text-align: center;">
+                                    <h3 th:text="${montoTotal}">$500.00</h3>
+                                </div>
+                            </section>
+                        </div>
+
+                        <!-- Botón para editar el presupuesto -->
+                        <div class="col-auto">
+                            <section>
+                                <div>
+                                    <a href="#" 
+                                       class="text-decoration-underline" 
+                                       style="color: black;" 
+                                       data-bs-toggle="modal" 
+                                       data-bs-target="#editarPresupuesto">
+                                        [[#{presupuesto.cambiar}]]
+                                    </a>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+
+                    <!-- Boton de agregar presupuesto -->
+                    <section th:fragment="botonAgregar" class="col text-end">
+                        <div class="add-category">
+                            <button class="btn btn-primary"
+                                    type="button"
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#agregarPresupuesto">
+                                <i class="fas fa-plus"></i>  [[#{presupuesto.agregar}]]
+                            </button>
+                        </div>
+                    </section>
+                </div>
+                
+                
+                <!-- Ventana modal de agregar presupuesto -->
+                <section th:fragment="agregarPresupuesto">
+                    <div id="agregarPresupuesto" 
+                         class="modal fade" 
+                         tabindex="-1" 
+                         aria-labelledby="exampleModalLabel" 
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-md modal-dialog-centered"> 
+                            <!-- modal dialog center pone la ventana en el centro de la pantalla -->
+                            <div class="modal-content">
+                                <div class="modal-header text-white" style="background-color: #4A4A4A;">
+                                    <h5 class="modal-title text-center w-100">[[#{presupuesto.agregar}]]</h5>
+                                    <button type="button" 
+                                            class="btn-close custom-close-btn" 
+                                            data-bs-dismiss="modal" 
+                                            aria-label="Close">
+                                    </button>
+                                </div> 
+                                <form th:action="@{/presupuesto/guardar}"
+                                      th:object="${presupuesto}"
+                                      method="POST" 
+                                      class="was-validated" 
+                                      enctype="multipart/form-data">
+                                    <div class="modal-body">
+                                        
+                                        <!-- Dropdown para elegir la categoria -->
+                                        <div class="mb-3">
+                                            <label for="idCategoria">[[#{presupuesto.categoria}]]</label>
+                                            <select name="idCategoria"
+                                                    class="form-select">
+                                                <option th:each="c : ${categorias}" 
+                                                        th:value="${c.idCategoria}">[[${c.nombreCategoria}]]</option> 
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="nombrePresupuesto">[[#{presupuesto.titulo}]]</label>
+                                            <input type="text" class="form-control" 
+                                                   name="nombrePresupuesto" required="true"/>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="modal-footer" style="text-align: center;">
+                                        <button class="btn custom-button" type="submit">[[#{accion.guardar}]]</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                
+                <!-- Ventana modal de cambiar presupuesto -->
+                <section th:fragment="editarPresupuesto">
+                    <div id="editarPresupuesto" 
+                         class="modal fade" 
+                         tabindex="-1" 
+                         aria-labelledby="exampleModalLabel" 
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-md modal-dialog-centered"> 
+                            <!-- modal dialog center pone la ventana en el centro de la pantalla -->
+                            <div class="modal-content">
+                                <div class="modal-header text-white" style="background-color: #4A4A4A;">
+                                    <h5 class="modal-title text-center w-100">[[#{presupuesto.cambiar}]]</h5>
+                                    <button type="button" 
+                                            class="btn-close custom-close-btn" 
+                                            data-bs-dismiss="modal" 
+                                            aria-label="Close">
+                                    </button>
+                                </div> 
+                                <form th:action="@{/presupuesto/guardar}"
+                                      th:object="${presupuesto}"
+                                      method="POST" 
+                                      class="was-validated" 
+                                      enctype="multipart/form-data">
+                                 <!--   <input type="hidden" name="idPresupuesto" th:field="*{idPresupuesto}"/> -->
+                                    <div class="modal-body">
+                                        
+                                        <!-- Dropdown para elegir la categoria -->
+                                        <div class="mb-3">
+                                            <label for="idCategoria">[[#{presupuesto.categoria}]]</label>
+                                            <select name="idCategoria"
+                                                    class="form-select">
+                                                <option th:each="c : ${categorias}" 
+                                                        th:value="${c.idCategoria}">[[${c.nombreCategoria}]]</option> 
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="nombrePresupuesto">[[#{presupuesto.titulo}]]</label>
+                                            <input type="text" class="form-control" 
+                                                   name="nombrePresupuesto" required="true"/>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="modal-footer" style="text-align: center;">
+                                        <button class="btn custom-button" type="submit">[[#{accion.guardar}]]</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+                <!-- Tabla con la lista de las presupuestos -->
+                <section th:fragment="listadoPresupuestos">
+                    
+                    <div th:if="${presupuestos != null and !presupuestos.empty}">
+                    
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th class="text-center">[[#{presupuesto.categoria}]]</th>
+                                <th class="text-center">[[#{presupuesto.asignado}]]</th>
+                                <th class="text-center">[[#{gasto.actual}]]</th>
+                                <th class="text-center">[[#{saldo.restante}]]</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="c : ${presupuestos}">
+                                <td>[[${c.categoria.nombreCategoria}]]</td>
+                                <td>[[${c.monto}]]</td>
+                                <td>XX</td>
+                                <td>XX</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    </div>
+                    
+                    <div class="page-header mt-3">
+                        <div th:if="${presupuestos == null or presupuestos.empty}">
+                            <h4><i class="fa-regular fa-face-frown"></i>  
+                                [[#{lista.vacia}]]  
+                                <i class="fa-regular fa-face-frown"></i></h4>
+                        </div>
+                    </div>
+
+                </section>
+            </div>
+        </section>
+    </body>
+</html>

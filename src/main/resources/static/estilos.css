@@ -142,7 +142,7 @@ body {
     list-style: none;
     display: flex;
     padding: 0;
-    margin: 20px 0;
+    margin: 0;
 }
 
 .category-tabs li {
@@ -161,27 +161,51 @@ body {
     text-decoration: underline;
 }
 
-.category-table {
+
+
+
+
+.table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
     background-color: #fff;
 }
 
-.category-table th,
-.category-table td {
+.table th,
+.table td {
     border: 1px solid #ddd;
     padding: 10px;
     text-align: left;
 }
 
-.category-table th {
+.table th {
     background-color: #4A4A4A;
     color: #fff;
 }
 
-.category-table tfoot td {
+.table tfoot td {
     font-weight: bold;
     text-align: right;
 }
 
+.custom-button {
+    background-color: #4A4A4A; 
+    color: #FFFFFF; 
+    border: none; 
+    padding: 10px 20px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    text-align: center;
+    font-size: 16px; 
+}
+
+.custom-button:hover {
+    background-color: #6B6B6B;
+}
+
+.custom-close-btn {
+        background-color: white !important; /* Asegura que el fondo sea blanco */
+        border: none !important; /* Elimina el borde */
+        color: black !important; /* El color del ícono */
+    }

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>SpendSmart</title>
+        <meta charset="UTF-8"/>
+
+    </head>
+    <body>
+        <section th:fragment="mainIngreso">
+            <div class="main">
+                
+                <!-- Encabezado -->
+                <section th:fragment="encabezado">
+                    <div class="page-header mb-3">
+                        <h1>[[#{plantilla.ingresos}]]</h1>
+                        <p>[[#{ingreso.subtitulo}]]</p>
+                    </div>
+                </section>
+
+                <!-- Boton de agregar ingreso -->
+                <div class="row align-items-center">
+                    <div class="col-auto text-start">
+                        <section th:fragment="botonAgregar">
+                            <div class="add-category">
+                                <button class="btn btn-primary"
+                                        type="button"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#agregarIngreso">
+                                    <i class="fas fa-plus"></i> [[#{ingreso.agregar}]]
+                                </button>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="col"></div>
+
+                    <!-- Sección total de ingresos -->
+                    <div class="col-auto text-end">
+                        <section>
+                            <div class="card p-3 border-dark" style="width: 250px; text-align: center;">
+                                <h3>[[${totalIngresos}]] [[#{plantilla.ingresos}]] $Total</h3>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+
+
+                <!-- Ventana modal de agregar ingreso -->
+                <section th:fragment="agregarIngreso">
+                    <div id="agregarIngreso" 
+                         class="modal fade" 
+                         tabindex="-1" 
+                         aria-labelledby="exampleModalLabel" 
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-md modal-dialog-centered"> 
+                            <!-- modal dialog center pone la ventana en el centro de la pantalla -->
+                            <div class="modal-content">
+                                <div class="modal-header text-white" style="background-color: #4A4A4A;">
+                                    <h5 class="modal-title text-center w-100">[[#{ingreso.agregar}]]</h5>
+                                    <button type="button" 
+                                            class="btn-close custom-close-btn" 
+                                            data-bs-dismiss="modal" 
+                                            aria-label="Close">
+                                    </button>
+                                </div> 
+                                <form th:action="@{/ingreso/guardar}"
+                                      th:object="${ingreso}"
+                                      method="POST" 
+                                      class="was-validated" 
+                                      enctype="multipart/form-data">
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label for="fechaIngreso">[[#{ingreso.fecha}]]</label>
+                                            <input type="date" class="form-control" 
+                                                   name="fechaIngreso" required="true"/>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="descripcion">[[#{categoria.descripcion}]]</label>
+                                            <input type="text" class="form-control" 
+                                                   name="descripcion" required="true"/>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="monto">[[#{gasto.monto}]]</label>
+                                            <input type="number" class="form-control" 
+                                                   name="monto" required="true"/>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer" style="text-align: center;">
+                                        <button class="btn custom-button" type="submit">[[#{accion.guardar}]]</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                
+                <!-- Ventana modal de cambiar ingreso -->
+                <section th:fragment="editarIngreso">
+                    <div id="editarIngreso" 
+                         class="modal fade" 
+                         tabindex="-1" 
+                         aria-labelledby="exampleModalLabel" 
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-md modal-dialog-centered"> 
+                            <!-- modal dialog center pone la ventana en el centro de la pantalla -->
+                            <div class="modal-content">
+                                <div class="modal-header text-white" style="background-color: #4A4A4A;">
+                                    <h5 class="modal-title text-center w-100">[[#{ingreso.editar}]]</h5>
+                                    <button type="button" 
+                                            class="btn-close custom-close-btn" 
+                                            data-bs-dismiss="modal" 
+                                            aria-label="Close">
+                                    </button>
+                                </div> 
+                                <form th:action="@{/ingreso/guardar}"
+                                      th:object="${ingreso}"
+                                      method="POST" 
+                                      class="was-validated" 
+                                      enctype="multipart/form-data">
+                                    <!--   <input type="hidden" name="idIngreso" th:field="*{idIngreso}"/> -->
+                                    <div class="modal-body">
+
+                                        <div class="mb-3">
+                                            <label for="fechaIngreso">[[#{gasto.monto}]]</label>
+                                            <input type="date" class="form-control" 
+                                                   name="fechaIngreso"
+                                                   required="true"/>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="descripcion">[[#{categoria.descripcion}]]</label>
+                                            <input type="text" class="form-control" 
+                                                   name="descripcion"
+                                                   required="true"/>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="monto">[[#{gasto.monto}]]</label>
+                                            <input type="number" class="form-control" 
+                                                   name="monto"
+                                                   required="true"/>
+                                        </div>
+
+                                        <div class="modal-footer" style="text-align: center;">
+                                            <button class="btn custom-button" type="submit">[[#{accion.guardar}]]</button>
+                                        </div>
+                                        
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+
+                <!-- Tabla con la lista de las ingresos -->
+                <section th:fragment="listadoIngresos">
+
+                    <div th:if="${ingresos != null and !ingresos.empty}">
+
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">[[#{ingreso.fecha}]]</th>
+                                    <th class="text-center">[[#{categoria.descripcion}]]</th>
+                                    <th class="text-center">[[#{gasto.monto}]]</th>
+                                    <th class="text-center">[[#{acciones.usuario}]]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="c : ${ingresos}">
+                                    <td>[[${c.fechaIngreso}]]</td>
+                                    <td>[[${c.descripcion}]]</td>
+                                    <td>$[[${c.monto}]]</td>
+                                    <td class="text-center">
+                                        <a class="btn"
+                                           data-bs-toggle="modal" 
+                                           data-bs-target="#editarIngreso"
+                                           th:href="@{/ingreso/modificar/}+${c.idIngreso}">
+                                            <i class="fa-solid fa-pen-to-square"></i> [[#{accion.actualizar}]]</a>
+
+                                        <a class="btn btn-danger" 
+                                           th:href="@{/ingreso/eliminar/}+${c.idIngreso}">
+                                            <i class="fa-solid fa-trash-can"></i> [[#{accion.eliminar}]]</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            
+                        </table>
+
+                    </div>
+
+                    <div class="page-header mt-3">
+                        <div th:if="${ingresos == null or ingresos.empty}">
+                            <h4><i class="fa-regular fa-face-frown"></i>  
+                                [[#{lista.vacia}]]  
+                                <i class="fa-regular fa-face-frown"></i></h4>
+                        </div>
+                    </div>
+                        
+                </section>
+            </div>
+        </section>
+    </body>
+</html>

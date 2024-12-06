@@ -20,6 +20,11 @@ public class Categoria implements Serializable{
     private Long idCategoria;
     private String nombreCategoria;
     
+    @OneToMany 
+    @JoinColumn(name="id_categoria", updatable = false)
+    private List<Gasto> gastos;
+    
+    
 }
 
 

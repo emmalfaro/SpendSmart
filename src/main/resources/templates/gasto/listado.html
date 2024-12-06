@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>SpendSmart</title>
+        <meta charset="UTF-8"/>
+        
+    </head>
+    <body>
+        <header th:replace="~{layout/plantilla :: header}">
+        </header>
+        
+        <!-- 
+        <section th:replace="~{gasto/fragmentos :: main}"/>
+        <section th:replace="~{gasto/fragmentos :: botonAgregar}"/>
+        <section th:replace="~{gasto/fragmentos :: agregarGasto}"/>
+        <section th:replace="~{gasto/fragmentos :: listadoGastos}"/>
+        -->
+        
+        <!--
+        <section th:replace="~{gasto/fragmentos :: encabezado}"/>
+        <section th:replace="~{gasto/fragmentos :: botonAgregar}"/>
+        <section th:replace="~{gasto/fragmentos :: tabs}"/>
+        <section th:replace="~{gasto/fragmentos :: listadoGastos}"/>
+        -->
+        
+        <section th:replace="~{gasto/fragmentos :: mainGasto}"/>
+        
+      </body>
+</html>
